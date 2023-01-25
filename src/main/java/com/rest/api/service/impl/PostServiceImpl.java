@@ -22,8 +22,8 @@ public class PostServiceImpl implements PostService {
     private PostRepository postRepository;
 
     @Override
-    public List<Post> getAllPosts(Integer pageNo, Integer pageSize, String sortBy) {
-        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(Sort.Direction.ASC, sortBy));
+    public List<Post> getAllPosts(Integer pageNo, Integer pageSize, String sortBy, Sort.Direction methodSort) {
+        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(methodSort, sortBy));
 
         Page<Post> pageResult = postRepository.findAll(paging);
         if (pageResult.hasContent()) {

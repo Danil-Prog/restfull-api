@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface PostService {
 
-    List<Post> getAllPosts(Integer pageNo, Integer pageSize, String sortBy);
+    List<Post> getAllPosts(Integer pageNo, Integer pageSize, String sortBy, Sort.Direction methodSort);
 
     Post getPostById(Long id);
 
