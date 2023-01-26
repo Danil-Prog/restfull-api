@@ -22,8 +22,8 @@ public class PostServiceImpl implements PostService {
     private PostRepository postRepository;
 
     @Override
-    public List<Post> getAllPosts(Integer pageNo, Integer pageSize, String sortBy, Sort.Direction methodSort) {
-        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(methodSort, sortBy));
+    public List<Post> getAllPosts(Integer page, Integer pageSize, String sortBy, Sort.Direction direction) {
+        Pageable paging = PageRequest.of(page, pageSize, Sort.by(direction, sortBy));
 
         Page<Post> pageResult = postRepository.findAll(paging);
         if (pageResult.hasContent()) {
@@ -47,5 +47,10 @@ public class PostServiceImpl implements PostService {
     @Override
     public Post createOrUpdatePost(Post post) {
         return postRepository.save(post);
+    }
+
+    @Override
+    public void saveListPosts(List<Post> posts) {
+        postRepository.saveAll(posts);
     }
 }
