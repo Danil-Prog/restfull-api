@@ -32,4 +32,13 @@ public class User {
     @Max(value = 5, message = "Максимальный курс: 5")
     private int course;
 
+    public User(String firstname, String lastname, int course) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.course = course;
+    }
+
+    public User() {
+
+    }
 }

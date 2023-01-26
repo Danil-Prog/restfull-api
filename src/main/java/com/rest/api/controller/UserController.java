@@ -39,8 +39,10 @@ public class UserController {
         return new ResponseEntity<>(userService.getAllUserByCourse(course), HttpStatus.OK);
     }
 
-    @PostMapping("/users/{id}")
-    public ResponseEntity<String> deleteUserById(@PathVariable Long id) {
-        return new ResponseEntity<>(userService.deleteUserById(id), HttpStatus.OK);
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity<User> deleteUserById(@PathVariable Long id) {
+        User user = userService.getUserById(id);
+        userService.deleteUserById(id);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 }

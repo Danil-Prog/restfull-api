@@ -16,4 +16,6 @@ public interface UserService {
 
     List<User> getAllUserByCourse(int course);
 
+    void saveListUsers(List<User> users);
+
 }
