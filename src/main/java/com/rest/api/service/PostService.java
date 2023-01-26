@@ -9,11 +9,13 @@ import java.util.List;
 
 public interface PostService {
 
-    List<Post> getAllPosts(Integer pageNo, Integer pageSize, String sortBy, Sort.Direction methodSort);
+    List<Post> getAllPosts(Integer page, Integer pageSize, String sortBy, Sort.Direction direction);
 
     Post getPostById(Long id);
 
     String deletePostById(Long id);
 
     Post createOrUpdatePost(Post post);
+
+    void saveListPosts(List<Post> posts);
 }

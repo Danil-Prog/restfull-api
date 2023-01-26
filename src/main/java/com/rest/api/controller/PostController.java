@@ -22,14 +22,14 @@ public class PostController {
     }
 
     @GetMapping("/posts")
-    public ResponseEntity<List<Post>> getAllPosts(@RequestParam(defaultValue = "0") Integer pageNo,
+    public ResponseEntity<List<Post>> getAllPosts(@RequestParam(defaultValue = "0") Integer page,
                                                   @RequestParam(defaultValue = "10") Integer pageSize,
                                                   @RequestParam(defaultValue = "id") String sortBy,
-                                                  @RequestParam(defaultValue = "ASC") String methodSort) {
-        if (methodSort.equals("DESC"))
-            return new ResponseEntity<>(postService.getAllPosts(pageNo, pageSize, sortBy, Sort.Direction.DESC), HttpStatus.OK);
+                                                  @RequestParam(defaultValue = "ASC") String direction) {
+        if (direction.equals("desc"))
+            return new ResponseEntity<>(postService.getAllPosts(page, pageSize, sortBy, Sort.Direction.DESC), HttpStatus.OK);
 
-        return new ResponseEntity<>(postService.getAllPosts(pageNo, pageSize, sortBy, Sort.Direction.ASC), HttpStatus.OK);
+        return new ResponseEntity<>(postService.getAllPosts(page, pageSize, sortBy, Sort.Direction.ASC), HttpStatus.OK);
     }
 
     @GetMapping("/posts/{id}")
