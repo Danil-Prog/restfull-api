@@ -3,6 +3,7 @@ package com.rest.api.controller;
 
 import com.rest.api.entity.Post;
 import com.rest.api.service.PostService;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,14 +23,14 @@ public class PostController {
     }
 
     @GetMapping("/posts")
-    public ResponseEntity<List<Post>> getAllPosts(@RequestParam(defaultValue = "0") Integer page,
-                                                  @RequestParam(defaultValue = "10") Integer pageSize,
-                                                  @RequestParam(defaultValue = "id") String sortBy,
-                                                  @RequestParam(defaultValue = "ASC") String direction) {
+    public Page<Post> getAllPosts(@RequestParam(defaultValue = "0") Integer page,
+                            @RequestParam(defaultValue = "10") Integer pageSize,
+                            @RequestParam(defaultValue = "id") String sortBy,
+                            @RequestParam(defaultValue = "ASC") String direction) {
         if (direction.equals("desc"))
-            return new ResponseEntity<>(postService.getAllPosts(page, pageSize, sortBy, Sort.Direction.DESC), HttpStatus.OK);
+            return postService.getAllPosts(page, pageSize, sortBy, Sort.Direction.DESC);
 
-        return new ResponseEntity<>(postService.getAllPosts(page, pageSize, sortBy, Sort.Direction.ASC), HttpStatus.OK);
+        return postService.getAllPosts(page, pageSize, sortBy, Sort.Direction.ASC);
     }
 
     @GetMapping("/posts/{id}")

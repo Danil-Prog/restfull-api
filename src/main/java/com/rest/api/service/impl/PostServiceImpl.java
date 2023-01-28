@@ -22,24 +22,23 @@ public class PostServiceImpl implements PostService {
     private PostRepository postRepository;
 
     @Override
-    public List<Post> getAllPosts(Integer page, Integer pageSize, String sortBy, Sort.Direction direction) {
+    public Page<Post> getAllPosts(Integer page, Integer pageSize, String sortBy, Sort.Direction direction) {
         Pageable paging = PageRequest.of(page, pageSize, Sort.by(direction, sortBy));
+        return postRepository.findAll(paging);
 
-        Page<Post> pageResult = postRepository.findAll(paging);
-        if (pageResult.hasContent()) {
-            return pageResult.getContent();
-        } else
-            return new ArrayList<>();
     }
 
     @Override
     public Post getPostById(Long id) {
         return postRepository.findById(id).orElseThrow(() ->
-                new BadRequestException("Такого поста не существует."));
+                new BadRequestException(String.format("Поста с id=%s не существует.", id)));
     }
 
     @Override
     public String deletePostById(Long id) {
+        postRepository.findById(id).orElseThrow(() ->
+                new BadRequestException(String.format("Поста с id=%s не существует.", id)));
+
         postRepository.deleteById(id);
         return "Пост был удален.";
     }

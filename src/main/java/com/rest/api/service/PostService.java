@@ -1,6 +1,7 @@
 package com.rest.api.service;
 
 import com.rest.api.entity.Post;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
@@ -9,7 +10,7 @@ import java.util.List;
 
 public interface PostService {
 
-    List<Post> getAllPosts(Integer page, Integer pageSize, String sortBy, Sort.Direction direction);
+    Page<Post> getAllPosts(Integer page, Integer pageSize, String sortBy, Sort.Direction direction);
 
     Post getPostById(Long id);
 
