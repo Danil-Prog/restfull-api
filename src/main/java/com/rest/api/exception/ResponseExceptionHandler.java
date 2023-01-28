@@ -3,6 +3,7 @@ package com.rest.api.exception;
 import com.rest.api.exception.validation.ValidationErrorResponse;
 import com.rest.api.exception.validation.Violation;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -43,4 +44,9 @@ public class ResponseExceptionHandler {
         return new ValidationErrorResponse(violations);
     }
 
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<CustomResponseException> badRequestException(BadRequestException ex) {
+        CustomResponseException customResponseException = new CustomResponseException(ex.getMessage());
+        return new ResponseEntity<>(customResponseException, HttpStatus.BAD_REQUEST);
+    }
 }
