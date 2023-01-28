@@ -1,6 +1,7 @@
 package com.rest.api.service;
 
 import com.rest.api.entity.Post;
+import com.rest.api.entity.Response;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -14,7 +15,7 @@ public interface PostService {
 
     Post getPostById(Long id);
 
-    String deletePostById(Long id);
+    Response<String> deletePostById(Long id);
 
     Post createOrUpdatePost(Post post);
 

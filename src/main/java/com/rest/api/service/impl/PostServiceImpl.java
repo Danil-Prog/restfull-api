@@ -2,6 +2,7 @@ package com.rest.api.service.impl;
 
 
 import com.rest.api.entity.Post;
+import com.rest.api.entity.Response;
 import com.rest.api.exception.BadRequestException;
 import com.rest.api.repository.PostRepository;
 import com.rest.api.service.PostService;
@@ -35,12 +36,12 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public String deletePostById(Long id) {
+    public Response<String> deletePostById(Long id) {
         postRepository.findById(id).orElseThrow(() ->
                 new BadRequestException(String.format("Поста с id=%s не существует.", id)));
 
         postRepository.deleteById(id);
-        return "Пост был удален.";
+        return new Response<>("Пост был удален.");
     }
 
     @Override

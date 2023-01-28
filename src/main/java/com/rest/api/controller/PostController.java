@@ -2,6 +2,7 @@ package com.rest.api.controller;
 
 
 import com.rest.api.entity.Post;
+import com.rest.api.entity.Response;
 import com.rest.api.service.PostService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
@@ -44,7 +45,7 @@ public class PostController {
     }
 
     @PostMapping("/posts/{id}")
-    public ResponseEntity<String> deletePostById(@PathVariable("id") Long id) {
+    public ResponseEntity<Response<String>> deletePostById(@PathVariable("id") Long id) {
         return new ResponseEntity<>(postService.deletePostById(id), HttpStatus.OK);
     }
 }
